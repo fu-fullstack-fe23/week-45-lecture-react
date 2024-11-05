@@ -6,7 +6,7 @@ interface Props {
 
 function TodoItem({todo} : Props) {
   return (
-    <li>{todo.todo}</li>
+    <li className={todo.completed ? 'done' : ''}>{todo.todo}</li>
   )
 }
 

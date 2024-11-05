@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TodoType, TodosResponseType } from './types/types';
 import TodoItem from './components/TodoItem';
+import AddNewTodo from './components/AddNewTodo';
 
 function App() {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -15,15 +16,28 @@ function App() {
     fetchTodos();
   }, []);
 
+  function addNewTodo(todoText : string) : void {
+    const newTodo : TodoType = {
+      completed : false,
+      userId: todos.length + 1,
+      id: todos.length + 1,
+      todo : todoText
+    }
+
+    setTodos(prevTodos => [...prevTodos, newTodo]);
+  }
 
   return (
-    <ul>
-      {
-        todos.map(todo => {
-          return <TodoItem todo={ todo } />
-        })
-      }
-    </ul>
+    <div className="app">
+      <ul>
+        {
+          todos.map(todo => {
+            return <TodoItem todo={ todo } />
+          })
+        }
+      </ul>
+      <AddNewTodo addNewTodo={ addNewTodo } />
+    </div>
   )
 }
 
